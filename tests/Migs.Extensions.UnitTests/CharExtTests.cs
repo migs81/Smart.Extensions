@@ -27,7 +27,7 @@ public class CharExtTests
     [Theory]
     [InlineData('a', "en-US", 'A')]
     [InlineData('z', "en-US", 'Z')]
-    [InlineData('i', "tr-TR", 'I')]
+    [InlineData('i', "tr-TR", 'İ')]
     [InlineData('ı', "tr-TR", 'I')]
     [InlineData('ß', "de-DE", 'ß')]
     [InlineData('ς', "el-GR", 'Σ')]
