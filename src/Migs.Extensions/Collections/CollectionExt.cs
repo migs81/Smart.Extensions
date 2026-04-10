@@ -18,7 +18,7 @@ namespace Migs.Extensions.Collections
         /// <returns>
         ///   <c>true</c> if [is null or empty] [the specified source]; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source) => source is not null && source.Any();
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source) => source is null || !source.Any();
 
         /// <summary>
         /// Determines whether this instance is null.
