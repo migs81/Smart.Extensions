@@ -33,13 +33,13 @@ public class CharExtTests
     [InlineData('ς', "el-GR", 'Σ')]
     [InlineData('é', "fr-FR", 'É')]
     [InlineData('ñ', "es-ES", 'Ñ')]
-    public void ToUpper_ValidInputWithCultureInfo_ShouldReturnUppercase(char input, string cultureInfo, char expected)
+    public void ToUpper_ValidInputWithCultureInfo_ShouldReturnUppercase(char input, string culture, char expected)
     {
         // arrange
-        var culture = CultureInfo.GetCultureInfo(cultureInfo);
+        var cultureInfo = CultureInfo.GetCultureInfo(culture);
         
         // act
-        var actual = input.ToUpper();
+        var actual = input.ToUpper(cultureInfo);
         
         // assert
         Assert.Equal(expected, actual);
