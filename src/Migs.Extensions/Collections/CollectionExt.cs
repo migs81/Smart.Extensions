@@ -41,7 +41,7 @@ namespace Migs.Extensions.Collections
         {
             _ = source ?? throw new ArgumentNullException(nameof(source));
             _ = collection ?? throw new ArgumentNullException(nameof(collection));
-
+            
             foreach (T item in collection)
                 source.Add(item);
         }
@@ -53,23 +53,5 @@ namespace Migs.Extensions.Collections
         /// <param name="source"></param>
         /// <returns></returns>
         public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> source) => new(source);
-
-        /// <summary>
-        /// Distincts by specific property.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
-        /// <typeparam name="TKey">The type of the key.</typeparam>
-        /// <param name="source">The source.</param>
-        /// <param name="keySelector">The key selector.</param>
-        /// <returns></returns>
-        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
-        {
-            HashSet<TKey> seenKeys = new();
-            foreach (TSource element in source)
-            {
-                if (seenKeys.Add(keySelector(element)))
-                    yield return element;
-            }
-        }
     }
 }
