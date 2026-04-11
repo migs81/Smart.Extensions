@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using System.Reflection;
+﻿using System.ComponentModel;
+using System.Globalization;
 
 namespace Migs.Extensions.Enums
 {
@@ -31,7 +31,7 @@ namespace Migs.Extensions.Enums
                         return "";
                     
                     var memberInfo = type.GetMember(enumName);
-                    if(memberInfo[0].GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false).FirstOrDefault() is AssemblyDescriptionAttribute attribute)
+                    if(memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() is DescriptionAttribute attribute)
                     {
                         description = attribute.Description;
                         break;
