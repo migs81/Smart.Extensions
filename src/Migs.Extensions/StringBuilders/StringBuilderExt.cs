@@ -10,36 +10,6 @@ namespace Migs.Extensions.StringBuilders
     public static class StringBuilderExt
     {
         /// <summary>
-        /// Clears the content of the StringBuilder.
-        /// </summary>
-        /// <param name="source"></param>
-        public static void Clear(this StringBuilder source) => source.Length = 0;
-
-        /// <summary>
-        /// Appends the given arguments as new line considering the specified format
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="FormatException"></exception>
-        public static StringBuilder AppendLine(this StringBuilder source, string format, params object[] args) 
-			=> source.AppendLine(string.Format(format, args));
-
-        /// <summary>
-        /// Appends the given arguments considering the specified format
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="FormatException"></exception>
-        public static StringBuilder Append(this StringBuilder source, string format, params object[] args) 
-			=> source.Append(string.Format(format, args));
-
-        /// <summary>
         /// Appends the given value if the condition is true.
         /// </summary>
         /// <param name="source"></param>
