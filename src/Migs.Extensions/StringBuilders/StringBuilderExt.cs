@@ -17,7 +17,7 @@ namespace Migs.Extensions.StringBuilders
         /// <param name="value"></param>
         /// <returns></returns>
         public static StringBuilder AppendIf(this StringBuilder source, bool condition, string value) 
-            => condition ? source.Append(value) : source;
+            => condition && value is not null ? source.Append(value) : source;
 
         /// <summary>
         /// Appends the given value as new line if the condition is true.
@@ -27,7 +27,7 @@ namespace Migs.Extensions.StringBuilders
         /// <param name="value"></param>
         /// <returns></returns>
         public static StringBuilder AppendLineIf(this StringBuilder source, bool condition, string value) 
-            => condition ? source.AppendLine(value) : source;
+            => condition && value is not null ? source.AppendLine(value) : source;
 
         /// <summary>
         /// Appends the given value if it is not null or empty.
