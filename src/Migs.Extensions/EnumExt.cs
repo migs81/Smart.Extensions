@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 
-namespace Migs.Extensions.Enums
+namespace Migs.Extensions
 {
     /// <summary>
     /// Contains extension methods for enums.

@@ -1,4 +1,4 @@
-﻿namespace Migs.Extensions.DateTimes
+﻿namespace Migs.Extensions
 {
     /// <summary>
     /// Contains extension methods for DateTimes

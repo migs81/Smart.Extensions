@@ -1,6 +1,5 @@
 using System.Globalization;
 using JetBrains.Annotations;
-using Migs.Extensions.Chars;
 
 namespace Migs.Extensions.UnitTests;
 

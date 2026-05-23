@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using System;
+﻿using System.Text;
 
-namespace Migs.Extensions.StringBuilders
+namespace Migs.Extensions
 {
     /// <summary>
     /// Contains extension methods for StringBuilder.

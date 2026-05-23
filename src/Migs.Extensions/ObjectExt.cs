@@ -1,10 +1,7 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Xml.Serialization;
 
-namespace Migs.Extensions.Objects
+namespace Migs.Extensions
 {
     /// <summary>
     /// Contains extension methods for objects.

@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using JetBrains.Annotations;
-using Migs.Extensions.Enums;
 
 namespace Migs.Extensions.UnitTests;
 

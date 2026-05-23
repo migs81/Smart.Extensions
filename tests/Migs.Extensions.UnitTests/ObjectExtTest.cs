@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using Migs.Extensions.Objects;
 
 namespace Migs.Extensions.UnitTests;
 

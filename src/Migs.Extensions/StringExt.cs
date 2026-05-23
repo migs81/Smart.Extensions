@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace Migs.Extensions.Strings
+namespace Migs.Extensions
 {
     public static class StringExt
     {

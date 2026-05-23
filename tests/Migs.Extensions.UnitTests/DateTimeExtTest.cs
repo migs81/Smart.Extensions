@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using Migs.Extensions.DateTimes;
 
 namespace Migs.Extensions.UnitTests.DateTimes;
 

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Migs.Extensions.Chars
+namespace Migs.Extensions
 {
     /// <summary>
     /// Contains extension methods for characters

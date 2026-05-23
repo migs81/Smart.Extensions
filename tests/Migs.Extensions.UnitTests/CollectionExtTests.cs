@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using JetBrains.Annotations;
-using Migs.Extensions.Collections;
 
 namespace Migs.Extensions.UnitTests;
 

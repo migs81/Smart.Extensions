@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
-namespace Migs.Extensions.Numerics
+namespace Migs.Extensions
 {
     public static class IntegerExt
     {
