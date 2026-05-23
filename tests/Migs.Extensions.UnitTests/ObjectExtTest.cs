@@ -117,10 +117,10 @@ public class ObjectExtTest
         const string value = "new";
         
         // act
-        var result = source.ReplaceIf(_ => source =="old", "new");
+        var result = source.ReplaceIf(_ => source == "old", "new");
         
         // assert
-        Assert.NotEqual(value, result);
+        Assert.NotEqual(source, result);
         Assert.Equal(value, result);
     }
     
