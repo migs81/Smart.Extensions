@@ -9,7 +9,7 @@ namespace Migs.Extensions.Strings
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static bool IsGuid(this string source) => Guid.TryParse(source, out Guid _);
+        public static bool IsGuid(this string source) => Guid.TryParse(source, out var _);
 
         /// <summary>
         /// Indicates if the given string value is a valid mail address.
@@ -55,7 +55,7 @@ namespace Migs.Extensions.Strings
             return Uri.TryCreate(source, uriKind, out var uriResult) 
                    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
         }
-
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Truncates the given string to the specified max length and appends the specified suffix.
         /// </summary>
@@ -74,7 +74,7 @@ namespace Migs.Extensions.Strings
             else
                 return $"{source[..maxLength].TrimEnd()}{suffix}";
         }
-
+#endif
         /// <summary>
         /// Indicates whether the character at the specified is position is categorized as a decimal digit.
         /// </summary>
