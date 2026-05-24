@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Globalization;
+using System.Net.Mail;
 
 namespace Migs.Extensions
 {
@@ -36,26 +37,24 @@ namespace Migs.Extensions
         /// <returns>
         ///   <c>true</c> if the specified value is date; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsDate(this string value) => DateTime.TryParse(value, out var _);
+        public static bool IsDate(this string value) => DateTime.TryParse(value,  out var _);
 
         
         /// <summary>
         /// Determines whether the given string is a valid Uri.
         /// </summary>
         /// <param name="source">The source.</param>
-        /// <param name="uriKind">Kind of the URI.</param>
         /// <returns>
-        ///   <c>true</c> if the specified URI kind is URI; otherwise, <c>false</c>.
+        ///   <c>true</c> if the given string is an absolute Uri; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">source</exception>
-        public static bool IsUri(this string source, UriKind uriKind = UriKind.Absolute)
+        public static bool IsUri(this string source)
         {
             _ = source ?? throw new ArgumentNullException(nameof(source));
-
-            return Uri.TryCreate(source, uriKind, out var uriResult) 
-                   && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            
+            return Uri.TryCreate(source, UriKind.Absolute, out _);
         }
-#if NET6_0_OR_GREATER
+        
         /// <summary>
         /// Truncates the given string to the specified max length and appends the specified suffix.
         /// </summary>
@@ -65,16 +64,17 @@ namespace Migs.Extensions
         /// <returns></returns>
         public static string Truncate(this string source, int maxLength, string? suffix = "...")
         {
-            suffix ??= "";
+            _ = source ?? throw new ArgumentNullException(nameof(source));
 
-            if (string.IsNullOrEmpty(source))
-                return suffix;
-            else if (maxLength < 0 || maxLength > source.Length)
+            if (source.Length == 0)
+                return source;
+            
+            if (maxLength < 0 || maxLength > source.Length)
                 return $"{source}{suffix}";
-            else
-                return $"{source[..maxLength].TrimEnd()}{suffix}";
+
+            return $"{source.Substring(0, maxLength).TrimEnd()}{suffix}";
         }
-#endif
+        
         /// <summary>
         /// Indicates whether the character at the specified is position is categorized as a decimal digit.
         /// </summary>

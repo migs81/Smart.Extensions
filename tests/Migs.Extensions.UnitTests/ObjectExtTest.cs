@@ -143,7 +143,7 @@ public class ObjectExtTest
     public void If_ValidInput_ShouldReturnNewValue()
     {
         // arrange
-        var source = "old";
+        const string source = "old";
         const string value = "new";
         
         // act
@@ -151,6 +151,21 @@ public class ObjectExtTest
         
         // assert
         Assert.Equal(value, result);
+    }
+    
+    [Fact]
+    public void If_WrongInput_ShouldReturnOldValue()
+    {
+        // arrange
+        const string oldValue = "old";
+        const string newValue = "new";
+        
+        // act
+        var result = oldValue.If(text => text.Length != 3, text => text = newValue);
+        
+        // assert
+        Assert.NotEqual(newValue, result);
+        Assert.Equal(oldValue, result);
     }
     
     #endregion
