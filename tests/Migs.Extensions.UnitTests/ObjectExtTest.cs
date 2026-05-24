@@ -128,17 +128,30 @@ public class ObjectExtTest
     
     #region If
 
-    // [Fact]
-    // public void If_NullValue_ShouldThrowException()
-    // {
-    //     // arrange
-    //     string source = null;
-    //     const string value = "new";
-    //     
-    //     // assert
-    //     Assert.Throws<NullReferenceException>(() => source.If(_ => source.Length == 3, source.Count()));
-    // }
-    //
+    [Fact]
+    public void If_NullValue_ShouldThrowException()
+    {
+        // arrange
+        string? source = null;
+        const string value = "new";
+        
+        // assert
+        Assert.Throws<NullReferenceException>(() => source.If(text=> text.Length == 3, text => text.Trim()));
+    }
+    
+    [Fact]
+    public void If_ValidInput_ShouldReturnNewValue()
+    {
+        // arrange
+        var source = "old";
+        const string value = "new";
+        
+        // act
+        var result = source.If(text => text.Length == 3, text => text = value);
+        
+        // assert
+        Assert.Equal(value, result);
+    }
     
     #endregion
 }

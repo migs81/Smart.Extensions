@@ -46,13 +46,13 @@ namespace Migs.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="obj">The object.</param>
-        /// <param name="predicate">The predicate.</param>
-        /// <param name="expression">The expression.</param>
+        /// <param name="condition">The predicate.</param>
+        /// <param name="action">The action.</param>
         /// <returns></returns>
-        public static T If<T>(this T obj, Expression<Func<T, bool>> predicate, Expression<Func<T, T>> expression) where T : class
+        public static T If<T>(this T obj, Func<T, bool> condition, Func<T, T> func) where T : class
         {
-            if (predicate.Compile().Invoke(obj))
-                return expression.Compile().Invoke(obj);
+            if (condition.Invoke(obj))
+                return func.Invoke(obj);
 
             return obj;
         }
