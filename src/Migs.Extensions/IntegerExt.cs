@@ -4,15 +4,13 @@ namespace Migs.Extensions
 {
     public static class IntegerExt
     {
-        #region Is
-
         public static int Change(this int arg, Expression<Func<int, int>> expression)
         {
             return expression.Compile().Invoke(arg);
         }
 
-        public static Int32 Random(this Int32 arg) => Guid.NewGuid().GetHashCode();
-
+        public static int Random(this int arg) => Guid.NewGuid().GetHashCode();
+        
         //public static bool IsZero(this short arg) => arg == 0;
 
         //public static bool IsZero(this int arg) => arg == 0;
@@ -28,8 +26,6 @@ namespace Migs.Extensions
         //public static bool IsZero(this ulong arg) => arg == 0;
 
         //public static bool IsGreater(this short arg, short value) => arg > value;
-
-        #endregion
 
         public static short Add(this short arg, short value) => (short)(arg + value);
 
@@ -70,6 +66,7 @@ namespace Migs.Extensions
         /// </summary>
         /// <param name="arg"></param>
         /// <param name="value"></param>
+        /// <param name="overflow"></param>
         /// <param name="max">should be greater then arg</param>
         /// <returns></returns>
         public static uint Add(this uint arg, uint value, out uint overflow, uint max = uint.MaxValue)
@@ -94,7 +91,6 @@ namespace Migs.Extensions
             }
         }
 
-
         /// <summary>
         /// Subtracts the given value from arg.
         /// Ensures that it does not go below zero!
@@ -109,15 +105,9 @@ namespace Migs.Extensions
             else
                 return 0;
         }
+        
+        public static int DivideBy(this int arg, int value) => arg / value;
 
-        public static int Divide(this int arg, int value)
-        {
-            return arg / value;
-        }
-
-        public static int Multiply(this int arg, int value)
-        {
-            return arg / value;
-        }
+        public static int MultiplyWith(this int arg, int value) => arg / value;
     }
 }

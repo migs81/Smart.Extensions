@@ -47,7 +47,7 @@ namespace Migs.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="obj">The object.</param>
         /// <param name="condition">The predicate.</param>
-        /// <param name="action">The action.</param>
+        /// <param name="func">The action</param>
         /// <returns></returns>
         public static T If<T>(this T obj, Func<T, bool> condition, Func<T, T> func) where T : class
         {
@@ -58,7 +58,7 @@ namespace Migs.Extensions
         }
 
         // /// <summary>
-        // /// Clones the specified object via json serialization.
+        // /// Clones the specified object via JSON serialization.
         // /// </summary>
         // /// <typeparam name="T"></typeparam>
         // /// <param name="obj">The object.</param>
@@ -78,7 +78,7 @@ namespace Migs.Extensions
         // }
 
         // /// <summary>
-        // /// Clones the specified object via json serialization.
+        // /// Clones the specified object via JSON serialization.
         // /// </summary>
         // /// <typeparam name="T"></typeparam>
         // /// <param name="obj">The object.</param>
@@ -99,7 +99,7 @@ namespace Migs.Extensions
         // }
         //
         // /// <summary>
-        // /// Tries to clone the specified object via json serialization.
+        // /// Tries to clone the specified object via JSON serialization.
         // /// </summary>
         // /// <typeparam name="T"></typeparam>
         // /// <param name="obj">The object.</param>
@@ -120,7 +120,7 @@ namespace Migs.Extensions
         // }
         //
         // /// <summary>
-        // /// Tries to clone the specified object via json serialization.
+        // /// Tries to clone the specified object via JSON serialization.
         // /// </summary>
         // /// <typeparam name="T"></typeparam>
         // /// <param name="obj">The object.</param>
@@ -184,7 +184,7 @@ namespace Migs.Extensions
         // }
         //
         // /// <summary>
-        // /// Converts the given object to Json.
+        // /// Converts the given object to JSON.
         // /// </summary>
         // /// <typeparam name="T"></typeparam>
         // /// <param name="obj">The object.</param>
@@ -203,7 +203,7 @@ namespace Migs.Extensions
         // }
         //
         // /// <summary>
-        // /// Converts the given object to Json.
+        // /// Converts the given object to JSON.
         // /// </summary>
         // /// <typeparam name="T"></typeparam>
         // /// <param name="obj">The object.</param>
@@ -237,9 +237,9 @@ namespace Migs.Extensions
         {
             _ = predicate ?? throw new ArgumentNullException(nameof(predicate));
 
-            List<KeyValuePair<string, TTarget>> result = new();
-
-            foreach(PropertyInfo property in typeof(TSource).GetProperties().Where(predicate))
+            var result =  new List<KeyValuePair<string, TTarget>>();
+            
+            foreach(var property in typeof(TSource).GetProperties().Where(predicate))
             {
                 if (property.GetValue(source) is TTarget targetValue)
                     result.Add(new KeyValuePair<string, TTarget>(property.Name, targetValue));

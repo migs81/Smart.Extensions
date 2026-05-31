@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+using System.Text;
 using JetBrains.Annotations;
 
 namespace Migs.Extensions.UnitTests;
@@ -118,8 +118,10 @@ public class StringExtTest
     }
     
     [Theory]
+    [InlineData(null)]
     [InlineData("")]
     [InlineData("abc")]
+    [InlineData("abc.com")]
     public void IsUri_WrongInput_ShouldReturnFalse(string? input)
     {
         // act
@@ -129,31 +131,22 @@ public class StringExtTest
         Assert.False(result);
     }
     
-    [Fact]
-    public void IsUri_NullValue_ShouldThrowException()
-    {
-        // arrange
-        string? source = null;
-        
-        // assert
-        Assert.Throws<ArgumentNullException>(() =>  source.IsUri());
-    }
-    
     #endregion
     
     #region Truncate
 
     [Fact]
-    public void Truncate_ValidInput_ShouldEqualNewString()
+    public void Truncate_ValidInput_ShouldReturnNewString()
     {
         // arrange
         const string input = "abcdefghijklmnopqrstuvwxyz";
+        const string expected = "abc...";
         
         // act
-        var result = input.Truncate(3, "...");
+        var result =  input.Truncate(3, "...");
         
         // assert
-        Assert.Equal("abc...", result);
+        Assert.Equal(expected, result);
     }
     
     [Theory]
@@ -161,24 +154,28 @@ public class StringExtTest
     [InlineData("abc", 10, "...")]
     public void Truncate_WrongInput_ShouldReturnNewString(string? input, int maxLength, string suffix)
     {
+        // arrange
+        var expected = $"{input}{suffix}";
+        
         // act
-        var result = input.Truncate(maxLength);
+        var result =  input.Truncate(maxLength);
         
         // assert
-        Assert.Equal($"{input}{suffix}", result);
+        Assert.Equal(expected, result);
     }
     
     [Fact]
-    public void Truncate_EmptyInput_ShouldReturnSource()
+    public void Truncate_EmptyInput_ShouldReturnEmptyString()
     {
         // arrange
         const string input = "";
+        const string expected = "";
         
         // act
-        var result = input.Truncate(3);
+        var result =  input.Truncate(3);
         
         // assert
-        Assert.Equal(input, result);
+        Assert.Equal(expected, result);
     }
     
     [Fact]
@@ -208,27 +205,17 @@ public class StringExtTest
         Assert.True(result);
     }
     
-    [Fact]
-    public void IsDigit_WrongInput_ShouldReturnFalse()
+    [Theory]
+    [InlineData(null, 0)]
+    [InlineData("", 0)]
+    [InlineData("abc", 0)]
+    public void IsDigit_WrongInput_ShouldReturnFalse(string? input, int index)
     {
-        // arrange
-        const string input = "abc";
-        
         // act
-        var result = input.IsDigit(1);
+        var result = input.IsDigit(index);
         
         // assert
         Assert.False(result);
-    }
-    
-    [Fact]
-    public void IsDigit_NullValue_ShouldThrowException()
-    {
-        // arrange
-        string? source = null;
-        
-        // assert
-        Assert.Throws<ArgumentNullException>(() =>  source.IsDigit(1));
     }
     
     #endregion
@@ -248,27 +235,17 @@ public class StringExtTest
         Assert.True(result);
     }
     
-    [Fact]
-    public void IsLetter_WrongInput_ShouldReturnFalse()
+    [Theory]
+    [InlineData(null, 0)]
+    [InlineData("", 0)]
+    [InlineData("0", 0)]
+    public void IsLetter_WrongInput_ShouldReturnFalse(string? input, int index)
     {
-        // arrange
-        const string input = "123";
-        
         // act
-        var result = input.IsLetter(1);
+        var result = input.IsLetter(index);
         
         // assert
         Assert.False(result);
-    }
-    
-    [Fact]
-    public void IsLetter_NullValue_ShouldThrowException()
-    {
-        // arrange
-        string? source = null;
-        
-        // assert
-        Assert.Throws<ArgumentNullException>(() =>  source.IsLetter(1));
     }
     
     #endregion
@@ -288,96 +265,150 @@ public class StringExtTest
         Assert.True(result);
     }
     
-    [Fact]
-    public void IsLetterOrDigit_WrongInput_ShouldReturnFalse()
+    [Theory]
+    [InlineData(null, 0)]
+    [InlineData("", 0)]
+    [InlineData("-", 0)]
+    public void IsLetterOrDigit_WrongInput_ShouldReturnFalse(string? input, int index)
     {
-        // arrange
-        const string input = "abc.123";
-        
         // act
-        var result = input.IsLetterOrDigit(3);
+        var result = input.IsLetterOrDigit(index);
         
         // assert
         Assert.False(result);
     }
     
-    [Fact]
-    public void IsLetterOrDigit_NullValue_ShouldThrowException()
+    #endregion
+
+    #region IsHighSurrogate
+
+    [Theory]
+    [InlineData('\uD800')]
+    [InlineData('\uDBFF')]
+    [InlineData('\uD83D')]
+    public void IsHighSurrogate_ValidInput_ShouldReturnTrue(char input)
     {
         // arrange
-        string? source = null;
+        var text = $"{input}";
+        
+        // act
+        var result =  text.IsHighSurrogate(0);
         
         // assert
-        Assert.Throws<ArgumentNullException>(() =>  source.IsLetterOrDigit(1));
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    public void IsHighSurrogate_WrongInput_ShouldReturnFalse(string? input)
+    {
+        // act
+        var result =  input.IsHighSurrogate(0);
+            
+        // assert
+        Assert.False(result);
+    }
+    
+    [Theory]
+    [InlineData('\uDC00')]
+    [InlineData('\uDFFF')]
+    public void IsHighSurrogate_WrongCharacter_ShouldReturnFalse(char input)
+    {
+        // arrange
+        var text = $"{input}";
+        
+        // act
+        var result =  text.IsHighSurrogate(0);
+        
+        // assert
+        Assert.False(result);
     }
     
     #endregion
     
-    [Theory]
-    [InlineData('\uD800')]
-    [InlineData('\uDBFF')]
-    [InlineData('\uD83D')]
-    public void IsHighSurrogate_ValidInput_ShouldBeTrue(char input)
-    {
-        // arrange
-        var text = $"{input}";
-        
-        // assert
-        Assert.True(text.IsHighSurrogate(0));
-    }
+    #region IsLowSurrogate
     
     [Theory]
     [InlineData('\uDC00')]
     [InlineData('\uDFFF')]
-    public void IsHighSurrogate_WrongInput_ShouldBeFalse(char input)
+    public void IsLowSurrogate_ValidInput_ShouldReturnTrue(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result =  text.IsLowSurrogate(0);
+        
         // assert
-        Assert.False(text.IsHighSurrogate(0));
+        Assert.True(result);
     }
     
     [Theory]
-    [InlineData('\uDC00')]
-    [InlineData('\uDFFF')]
-    public void IsLowSurrogate_ValidInput_ShouldBeTrue(char input)
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("a")]
+    public void IsLowSurrogate_WrongInput_ShouldReturnFalse(string? input)
     {
-        // arrange
-        var text = $"{input}";
+        // act
+        var result = input.IsLowSurrogate(0);
         
         // assert
-        Assert.True(text.IsLowSurrogate(0));
+        Assert.False(result);
     }
     
     [Theory]
     [InlineData('\uD800')]
     [InlineData('\uDBFF')]
     [InlineData('\uD83D')]
-    public void IsLowSurrogate_WrongInput_ShouldBeFalse(char input)
+    public void IsLowSurrogate_WrongCharacter_ShouldReturnFalse(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result =  text.IsLowSurrogate(0);
+        
         // assert
-        Assert.False(text.IsLowSurrogate(0));
+        Assert.False(result);
     }
     
+    #endregion
+
+    #region IsSurrogate
+
     [Theory]
     [InlineData('\uD800')]
     [InlineData('\uDBFF')]
     [InlineData('\uD83D')]
     [InlineData('\uDC00')]
     [InlineData('\uDFFF')]
-    public void IsSurrogate_ValidInput_ShouldBeTrue(char input)
+    public void IsSurrogate_ValidInput_ShouldReturnTrue(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result =  text.IsSurrogate(0);
+        
         // assert
-        Assert.True(text.IsSurrogate(0));
+        Assert.True(result);
     }
     
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("a")]
+    public void IsSurrogate_WrongInput_ShouldReturnTrue(string? input)
+    {
+        // assert
+        Assert.False(input.IsSurrogate(0));
+    }
+
+    #endregion
+
+    #region IsPunctuation
+
     [Theory]
     [InlineData('.')]
     [InlineData(',')]
@@ -395,28 +426,48 @@ public class StringExtTest
     [InlineData('}')]
     [InlineData('-')]
     [InlineData('/')]
-    public void IsPunctuation_ValidInput_ShouldBeTrue(char input)
+    public void IsPunctuation_ValidInput_ShouldReturnTrue(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result =  text.IsPunctuation(0);
+        
         // assert
-        Assert.True(text.IsPunctuation(0));
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("a")]
+    public void IsPunctuation_WrongInput_ShouldReturnFalse(string? input)
+    {
+        // assert
+        Assert.False(input.IsPunctuation(0));
     }
     
     [Theory]
     [InlineData('a')]
     [InlineData('A')]
     [InlineData('0')]
-    public void IsPunctuation_WrongInput_ShouldBeFalse(char input)
+    public void IsPunctuation_WrongCharacter_ShouldReturnFalse(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result =  text.IsPunctuation(0);
+        
         // assert
-        Assert.False(text.IsPunctuation(0));
+        Assert.False(result);
     }
-    
+
+    #endregion
+
+    #region IsSeparator
+
     [Theory]
     [InlineData(' ')]      // Space (U+0020)
     [InlineData('\u00A0')] // No-Break Space (NBSP)
@@ -437,13 +488,29 @@ public class StringExtTest
     [InlineData('\u202F')] // Narrow No-Break Space
     [InlineData('\u205F')] // Medium Mathematical Space
     [InlineData('\u3000')] // Ideographic Space (CJK)
-    public void IsSeparator_ValidInput_ShouldBeTrue(char input)
+    public void IsSeparator_ValidInput_ShouldReturnTrue(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result =  text.IsSeparator(0);
+        
         // assert
-        Assert.True(text.IsSeparator(0));
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("a")]
+    public void IsSeparator_WrongInput_ShouldReturnFalse(string? input)
+    {
+        // act
+        var result =  input.IsSeparator(0);
+        
+        // assert
+        Assert.False(result);
     }
     
     [Theory]
@@ -456,63 +523,139 @@ public class StringExtTest
     [InlineData('1')]
     [InlineData(char.MinValue)]
     [InlineData(char.MaxValue)]
-    public void IsSeparator_WrongInput_ShouldBeFalse(char input)
+    public void IsSeparator_WrongCharacter_ShouldReturnFalse(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result =  text.IsSeparator(0);
+        
         // assert
-        Assert.False(text.IsSeparator(0));
+        Assert.False(result);
+    }
+
+    #endregion
+
+    #region IsUpper
+
+    [Theory]
+    [InlineData("A", 0)]
+    [InlineData("aBc", 1)]
+    public void IsUpper_ValidCharacterAtIndex_ShouldReturnTrue(string input, int index)
+    {
+        // act
+        var result = input.IsUpper(index);
+        
+        // assert
+        Assert.True(result);
     }
     
     [Theory]
-    [InlineData('A')]
-    [InlineData('Z')]
-    public void IsUpper_ValidInput_ShouldBeTrue(char input)
+    [InlineData("ABC")]
+    [InlineData("ABC!")]
+    [InlineData("ABC123!")]
+    public void IsUpper_ValidInput_ShouldReturnTrue(string? input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result = text.IsUpper(0);
+        
         // assert
-        Assert.True(text.IsUpper(0));
+        Assert.True(result);
     }
     
     [Theory]
-    [InlineData('a')]
-    [InlineData('z')]
-    public void IsUpper_WrongInput_ShouldBeFalse(char input)
+    [InlineData(null, 0)]
+    [InlineData("", 0)]
+    [InlineData("a", 0)]
+    [InlineData("AbC", 1)]
+    public void IsUpper_WrongCharacterAtIndex_ShouldReturnFalse(string? input, int index)
     {
-        // arrange
-        var text = $"{input}";
+        // act
+        var result = input.IsUpper(index);
         
         // assert
-        Assert.False(text.IsUpper(0));
+        Assert.False(result);
     }
     
     [Theory]
-    [InlineData('a')]
-    [InlineData('z')]
-    public void IsLower_ValidInput_ShouldBeTrue(char input)
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("aBC")]
+    public void IsUpper_WrongInput_ShouldReturnFalse(string? input)
     {
-        // arrange
-        var text = $"{input}";
+        // act
+        var result = input.IsUpper();
         
         // assert
-        Assert.True(text.IsLower(0));
+        Assert.False(result);
+    }
+
+    #endregion
+
+    #region IsLower
+
+    [Theory]
+    [InlineData("a", 0)]
+    [InlineData("AbC", 1)]
+    public void IsLower_ValidCharacterAtIndex_ShouldReturnTrue(string input, int index)
+    {
+        // act
+        var result = input.IsLower(index);
+        
+        // assert
+        Assert.True(result);
     }
     
     [Theory]
-    [InlineData('A')]
-    [InlineData('Z')]
-    public void IsLower_WrongInput_ShouldBeFalse(char input)
+    [InlineData("a")]
+    [InlineData("abc")]
+    [InlineData("abc!")]
+    [InlineData("abc123!")]
+    public void IsLower_ValidInput_ShouldReturnTrue(string input)
     {
-        // arrange
-        var text = $"{input}";
+        // act
+        var result = input.IsLower();
         
         // assert
-        Assert.False(text.IsLower(0));
+        Assert.True(result);
     }
     
+    [Theory]
+    [InlineData(null, 0)]
+    [InlineData("", 0)]
+    [InlineData("A", 0)]
+    [InlineData("aBc", 1)]
+    public void IsLower_WrongCharacterAtIndex_ShouldReturnFalse(string? input, int index)
+    {
+        // act
+        var result = input.IsLower(index);
+        
+        // assert
+        Assert.False(result);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("A")]
+    [InlineData("AbC")]
+    public void IsLower_WrongInput_ShouldReturnFalse(string? input)
+    {
+        // act
+        var result = input.IsLower();
+        
+        // assert
+        Assert.False(result);
+    }
+    
+    #endregion
+
+    #region IsWhiteSpace
+
     [Theory]
     [InlineData(' ')] // Space (U+0020)
     [InlineData('\t')] // Tab (U+0009)
@@ -538,13 +681,29 @@ public class StringExtTest
     [InlineData('\u2029')] // Paragraph Separator
     [InlineData('\u205F')] // Medium Mathematical Space
     [InlineData('\u3000')] // Ideographic Space (CJK)
-    public void IsWhiteSpace_ValidInput_ShouldBeTrue(char input)
+    public void IsWhiteSpace_ValidCharacter_ShouldReturnTrue(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result = text.IsWhiteSpace(0);
+        
         // assert
-        Assert.True(text.IsWhiteSpace(0));
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData(null, 0)]
+    [InlineData("", 0)]
+    [InlineData("a", 0)]
+    public void IsWhiteSpace_WrongInput_ShouldReturnFalse(string? input, int index)
+    {
+        // act
+        var result = input.IsWhiteSpace(index);
+        
+        // assert
+        Assert.False(result);
     }
     
     [Theory]
@@ -557,15 +716,22 @@ public class StringExtTest
     [InlineData(char.MaxValue)] // Invalid character (U+FFFF)
     [InlineData('\u00AD')] // Soft Hyphen
     [InlineData('\u2013')] // En Dash
-    public void IsWhiteSpace_WrongInput_ShouldBeFalse(char input)
+    public void IsWhiteSpace_WrongCharacter_ShouldReturnFalse(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result = text.IsWhiteSpace(0);
+        
         // assert
-        Assert.False(text.IsWhiteSpace(0));
+        Assert.False(result);
     }
     
+    #endregion
+
+    #region IsSymbol
+
     [Theory]
     [InlineData('+')] // Plus (U+002B)
     [InlineData('=')] // Equals (U+003D)
@@ -592,13 +758,28 @@ public class StringExtTest
     [InlineData('©')] // Copyright (U+00A9)
     [InlineData('®')] // Registered (U+00AE)
     [InlineData('™')] // Trademark (U+2122)
-    public void IsSymbol_ValidInput_ShouldBeTrue(char input)
+    public void IsSymbol_ValidCharacter_ShouldReturnTrue(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result = text.IsSymbol(0);
+        
         // assert
-        Assert.True(text.IsSymbol(0));
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData("+", 0)] // Plus (U+002B)
+    [InlineData("a=", 1)] // Equals (U+003D)
+    public void IsSymbol_ValidInput_ShouldReturnTrue(string input, int index)
+    {
+        // act
+        var result =  input.IsSymbol(index);
+        
+        // assert
+        Assert.True(result);
     }
     
     [Theory]
@@ -611,15 +792,35 @@ public class StringExtTest
     [InlineData('«')] // Quotation mark (punctuation)
     [InlineData(char.MinValue)] // Null character
     [InlineData(char.MaxValue)] // Invalid character (U+FFFF)
-    public void IsSymbol_WrongInput_ShouldBeFalse(char input)
+    public void IsSymbol_WrongCharacter_ShouldReturnFalse(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result = text.IsSymbol(0);
+        
         // assert
-        Assert.False(text.IsSymbol(0));
+        Assert.False(result);
+    }
+
+    [Theory]
+    [InlineData(null, 0)] 
+    [InlineData("", 0)] 
+    [InlineData("abc", 1)] 
+    public void IsSymbol_WrongInput_ShouldReturnFalse(string? input, int index)
+    {
+        // act
+        var result = input.IsSymbol(index);
+        
+        // assert
+        Assert.False(result);
     }
     
+    #endregion
+
+    #region IsControl
+
     [Theory]
     [InlineData('\u0000')] // Null (NUL)
     [InlineData('\u0001')] // Start of Heading (SOH)
@@ -630,27 +831,227 @@ public class StringExtTest
     [InlineData('\u0006')] // Acknowledge (ACK)
     [InlineData('\u0007')] // Bell (BEL, alert)
     [InlineData('\u0008')] // Backspace (BS)
-    public void IsControl_ValidInput_ShouldBeTrue(char input)
+    public void IsControl_ValidCharacter_ShouldReturnTrue(char input)
     {
         // arrange
         var text = $"{input}";
         
+        // act
+        var result = text.IsControl(0);
+        
         // assert
-        Assert.True(text.IsControl(0));
+        Assert.True(result);
     }
     
+    [Theory]
+    [InlineData(null, 0)] 
+    [InlineData("", 0)] 
+    [InlineData("abc", 1)] 
+    public void IsControl_WrongInput_ShouldReturnFalse(string? input, int index)
+    {
+        // arrange
+        var result = input.IsControl(index);
+        
+        // assert
+        Assert.False(result);
+    }
+
     [Theory]
     [InlineData(' ')] // Space (not a control character)
     [InlineData('A')] // Letter
     [InlineData('1')] // Digit
     [InlineData(',')] // Punctuation
     [InlineData('.')] // Punctuation
-    public void IsControl_WrongInput_ShouldBeFalse(char input)
+    public void IsControl_WrongCharacter_ShouldReturnFalse(char input)
     {
         // arrange
-        var text = $"{input}";
+        var result = $"{input}".IsControl(0);
         
         // assert
-        Assert.False(text.IsControl(0));
+        Assert.False(result);
     }
+    
+    #endregion
+
+    #region ToByteArray
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("abc")]
+    [InlineData("abc 123 ABC 123")]
+    public void ToByteArray_ValidInput_ShouldBeEqual(string value)
+    {
+        // arrange
+        var expected= Encoding.UTF8.GetBytes(value);
+        
+        // act
+        var result= value.ToByteArray(new UTF8Encoding());
+        
+        // assert
+        Assert.Equal(expected, result);
+    }
+    
+    [Theory]
+    [InlineData(null, null)]
+    [InlineData("abc", null)]
+    public void ToByteArray_NullInput_ShouldThrowException(string? input, Encoding? encoding)
+    {
+        // assert
+        Assert.Throws<ArgumentNullException>(() => input.ToByteArray(encoding));
+    }
+    
+    #endregion
+
+    #region IsNumeric
+
+    [Theory]
+    [InlineData("123")]
+    [InlineData("-200")]
+    [InlineData("3453452351")]
+    public void IsNumeric_ValidInput_ShouldReturnTrue(string value)
+    {
+        // arrange
+        var result = value.IsNumeric();
+        
+        // assert
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("12a")]
+    [InlineData("abc!")]
+    public void IsNumeric_WrongInput_ShouldReturnFalse(string? value)
+    {
+        // arrange
+        var result = value.IsNumeric();
+        
+        // assert
+        Assert.False(result);
+    }
+    
+    #endregion
+
+    #region ToPascalCase
+
+    [Theory]
+    [InlineData("", "")]
+    [InlineData("abc", "Abc")]
+    [InlineData("aBC", "Abc")]
+    [InlineData("ab123", "Ab123")]
+    [InlineData("aBc aBC", "AbcAbc")]
+    [InlineData("to camel case", "ToCamelCase")]
+    [InlineData("to_camel-case!", "ToCamelCase")]
+    
+    public void ToPascalCase_ValidInput_ShouldReturnNewString(string input, string expected)
+    {
+        // arrange
+        var result =  input.ToPascalCase();
+        
+        // assert
+        Assert.Equal(expected, result);
+    }
+    
+    [Fact]
+    public void ToPascalCase_NullInput_ShouldThrowException()
+    {
+        // arrange
+        string? value = null;
+        
+        // assert
+        Assert.Throws<ArgumentNullException>(value.ToPascalCase);
+    }
+    
+    #endregion
+    
+    #region ToCamelCase
+
+    [Theory]
+    [InlineData("", "")]
+    [InlineData("abc", "abc")]
+    [InlineData("aBC", "abc")]
+    [InlineData("ab123", "ab123")]
+    [InlineData("aBc aBC", "abcAbc")]
+    [InlineData("to camel case", "toCamelCase")]
+    [InlineData("to_camel-case!", "toCamelCase")]
+    
+    public void ToCamelCase_ValidInput_ShouldReturnNewString(string input, string expected)
+    {
+        // arrange
+        var result =  input.ToCamelCase();
+        
+        // assert
+        Assert.Equal(expected, result);
+    }
+    
+    [Fact]
+    public void ToCamelCase_NullInput_ShouldThrowException()
+    {
+        // arrange
+        string? value = null;
+        
+        // assert
+        Assert.Throws<ArgumentNullException>(value.ToCamelCase);
+    }
+    
+    #endregion
+    
+    #region ToAlphaNumeric
+    
+    [Theory]
+    [InlineData("", "")]
+    [InlineData("a b c", "abc")]
+    [InlineData("a-b_c^1!2?#!3", "abc123")]
+    
+    public void ToAlphaNumeric_ValidInput_ShouldReturnNewString(string input, string expected)
+    {
+        // arrange
+        var result =  input.ToAlphaNumeric();
+        
+        // assert
+        Assert.Equal(expected, result);
+    }
+    
+    [Fact]
+    public void ToAlphaNumeric_NullInput_ShouldThrowException()
+    {
+        // arrange
+        string? value = null;
+        
+        // assert
+        Assert.Throws<ArgumentNullException>(value.ToAlphaNumeric);
+    }
+    
+    #endregion
+
+    #region IsAlphaNumeric
+
+    [Theory]
+    [InlineData("abc123")]
+    [InlineData("abc123ABC123")]
+    
+    public void IsAlphaNumeric_ValidInput_ShouldReturnTrue(string input)
+    {
+        // arrange
+        var result = input.IsAlphaNumeric();
+        
+        // assert
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("abc_123!")]
+    public void IsAlphaNumeric_WrongInput_ShouldReturnFalse(string? input)
+    {
+        // arrange
+        var result = input.IsAlphaNumeric();
+        
+        // assert
+        Assert.False(result);
+    }
+
+    #endregion
 }

@@ -8,17 +8,17 @@ namespace Migs.Extensions
     public static class CollectionExt
     {
         /// <summary>
-        /// Determines whether [is null or empty].
+        /// Determines whether the given collection is null or empty.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
         /// <returns>
-        ///   <c>true</c> if [is null or empty] [the specified source]; otherwise, <c>false</c>.
+        ///   <c>true</c> if the given collection is null or empty; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> source) => source is null || !source.Any();
 
         /// <summary>
-        /// Determines whether this instance is null.
+        /// Determines whether the given collection is null.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
@@ -39,7 +39,7 @@ namespace Migs.Extensions
             _ = source ?? throw new ArgumentNullException(nameof(source));
             _ = collection ?? throw new ArgumentNullException(nameof(collection));
             
-            foreach (T item in collection)
+            foreach (var item in collection)
                 source.Add(item);
         }
 
