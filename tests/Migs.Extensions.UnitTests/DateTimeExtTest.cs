@@ -1,12 +1,72 @@
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests.DateTimes;
+namespace Migs.Extensions.UnitTests;
 
 [TestSubject(typeof(DateTimeExt))]
 public class DateTimeExtTest
 {
+    [Theory]
+    [InlineData("31.05.2026")]
+    [InlineData("30.05.2026")]
+    public void IsWeekend_ValidInput_ShouldReturnTrue(string value)
+    {
+        // arrange
+        var date = DateTime.Parse(value);
+        
+        // act
+        var result = date.IsWeekend();
+        
+        // assert
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData("29.05.2026")]
+    [InlineData("28.05.2026")]
+    public void IsWeekend_WrongInput_ShouldReturnFalse(string value)
+    {
+        // arrange
+        var date = DateTime.Parse(value);
+        
+        // act
+        var result = date.IsWeekend();
+        
+        // assert
+        Assert.False(result);
+    }
+    
+    [Theory]
+    [InlineData("29.05.2026")]
+    [InlineData("28.05.2026")]
+    public void IsWeekday_ValidInput_ShouldReturnTrue(string value)
+    {
+        // arrange
+        var date = DateTime.Parse(value);
+        
+        // act
+        var result = date.IsWeekday();
+        
+        // assert
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData("31.05.2026")]
+    [InlineData("30.05.2026")]
+    public void IsWeekday_WrongInput_ShouldReturnFalse(string value)
+    {
+        // arrange
+        var date = DateTime.Parse(value);
+        
+        // act
+        var result = date.IsWeekday();
+        
+        // assert
+        Assert.False(result);
+    }
+    
     [Fact]
-    public void IsBetween_ValidDateInput_ShouldBeTrue()
+    public void IsBetween_ValidDateInput_ShouldReturnTrue()
     {
         // arrange
         var date1 = new DateTime(2000, 1, 1);
@@ -21,7 +81,7 @@ public class DateTimeExtTest
     }
     
     [Fact]
-    public void IsBetween_WrongDateInput_ShouldBeFalse()
+    public void IsBetween_WrongDateInput_ShouldReturnFalse()
     {
         // arrange
         var date1 = new DateTime(2000, 1, 1);
@@ -36,7 +96,7 @@ public class DateTimeExtTest
     }
     
     [Fact]
-    public void IsBetween_ValidDateTimeInput_ShouldBeTrue()
+    public void IsBetween_ValidDateTimeInput_ShouldReturnTrue()
     {
         // arrange
         var date = new DateOnly(2000, 1, 1);
@@ -52,7 +112,7 @@ public class DateTimeExtTest
     }
     
     [Fact]
-    public void IsBetween_WrongDateTimeInput_ShouldBeFalse()
+    public void IsBetween_WrongDateTimeInput_ShouldReturnFalse()
     {
         // arrange
         var date = new DateOnly(2000, 1, 1);

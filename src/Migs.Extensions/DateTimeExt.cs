@@ -5,6 +5,12 @@
     /// </summary>
     public static class DateTimeExt
     {
+        #region Is
+        
+        public static bool IsWeekend(this DateTime value) => value.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday;
+
+        public static bool IsWeekday(this DateTime value) => value.DayOfWeek is not (DayOfWeek.Saturday or DayOfWeek.Sunday);
+
         /// <summary>
         /// Returns true if the given DateTime is between the specified start and end DateTime.
         /// </summary>
@@ -16,5 +22,7 @@
         public static bool IsBetween(this DateTime source, DateTime startDate, DateTime endDate, bool compareTime = false) => compareTime
             ? source >= startDate && source <= endDate // compares date and time
             : source.Date >= startDate.Date && source.Date <= endDate.Date; // compares only the date
+        
+        #endregion
     }
 }
