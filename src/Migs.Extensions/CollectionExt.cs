@@ -13,9 +13,9 @@ namespace Migs.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
         /// <returns>
-        ///   <c>true</c> if the given collection is null or empty; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified source is null or empty; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source) => source is null || !source.Any();
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T>? source) => source is null || !source.Any();
 
         /// <summary>
         /// Determines whether the given collection is null.
@@ -25,7 +25,7 @@ namespace Migs.Extensions
         /// <returns>
         ///   <c>true</c> if the specified source is null; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNull<T>(this IEnumerable<T> source) => source is null;
+        public static bool IsNull<T>(this IEnumerable<T>? source) => source is null;
 
         /// <summary>
         /// Adds a range of objects to the collection.
