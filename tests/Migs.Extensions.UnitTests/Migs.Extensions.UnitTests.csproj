@@ -24,8 +24,4 @@
       <ProjectReference Include="..\..\src\Migs.Extensions\Migs.Extensions.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="TestData\" />
-    </ItemGroup>
-
 </Project>
