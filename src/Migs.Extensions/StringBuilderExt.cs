@@ -65,5 +65,36 @@ namespace Migs.Extensions
 
             return source;
         }
+
+        /// <summary>
+        /// Returns a value indicating whether a specified substring occurs within this string.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static bool Contains(this StringBuilder source, string value)
+        {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            
+            return source.ToString().Contains(value);
+        }
+        
+        /// <summary>
+        /// Returns a value indicating whether a specified substring occurs within this string.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="value"></param>
+        /// <param name="comparison"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static bool Contains(this StringBuilder source, string value, StringComparison comparison)
+        {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            
+            return source.ToString().IndexOf(value, comparison) != -1;
+        }
     }
 }
