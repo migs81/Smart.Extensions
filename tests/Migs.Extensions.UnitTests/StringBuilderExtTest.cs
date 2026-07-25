@@ -239,4 +239,66 @@ public class StringBuilderExtTest
     }
     
     #endregion
+    
+    #region Contains
+
+    [Theory]
+    [InlineData("Hello world", "world")]
+    [InlineData("Hello world", "ll")]
+    [InlineData("Hello world", " ")]
+    public void Contains_ValidInput_ShouldReturnTrue(string input, string searchValue)
+    {
+        // arrange
+        var sb = new StringBuilder(input);
+        
+        // act
+        var result = sb.Contains(searchValue);
+        
+        // assert
+        Assert.True(result);
+    }
+    
+    [Theory]
+    [InlineData("Hello world", "world", StringComparison.InvariantCultureIgnoreCase)]
+    [InlineData("Hello world", "ll", StringComparison.InvariantCultureIgnoreCase)]
+    [InlineData("Hello world", " ", StringComparison.InvariantCultureIgnoreCase)]
+    public void Contains_ValidInput_WithComparison_ShouldReturnTrue(string input, string searchValue, StringComparison comparison)
+    {
+        // arrange
+        var sb = new StringBuilder(input);
+        
+        // act
+        var result = sb.Contains(searchValue, comparison);
+        
+        // assert
+        Assert.True(result);
+    }
+    
+    [Fact]
+    public void Contains_WrongInput_ShouldReturnFalse()
+    {
+        // arrange
+        var sb = new StringBuilder("Hello world");
+        
+        // act
+        var result = sb.Contains("h");
+        
+        // assert
+        Assert.False(result);
+    }
+    
+    [Fact]
+    public void Contains_WrongInput_WithComparison_ShouldReturnFalse()
+    {
+        // arrange
+        var sb = new StringBuilder("Hello world");
+        
+        // act
+        var result = sb.Contains("h", StringComparison.InvariantCulture);
+        
+        // assert
+        Assert.False(result);
+    }
+    
+    #endregion
 }
