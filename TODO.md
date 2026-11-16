@@ -1,7 +1,5 @@
 # 📝 TODO
 
- - Rename project
- - Rename files
  - Add more extensions
 
 ## Extensions
