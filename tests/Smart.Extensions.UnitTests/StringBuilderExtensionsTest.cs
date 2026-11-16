@@ -1,10 +1,10 @@
 using System.Text;
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests;
+namespace Smart.Extensions.UnitTests;
 
-[TestSubject(typeof(StringBuilderExt))]
-public class StringBuilderExtTest
+[TestSubject(typeof(StringBuilderExtensions))]
+public class StringBuilderExtensionsTest
 {
     #region AppendIf
 

@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests;
+namespace Smart.Extensions.UnitTests;
 
-[TestSubject(typeof(EnumExt))]
-public class EnumExtTest
+[TestSubject(typeof(EnumExtensions))]
+public class EnumExtensionsTest
 {
     private enum EnumWithDescription
     {

@@ -1,6 +1,6 @@
-﻿namespace Migs.Extensions
+﻿namespace Smart.Extensions
 {
-    public static class IntegerExt
+    public static class IntegerExtensions
     {
         #region Is
         

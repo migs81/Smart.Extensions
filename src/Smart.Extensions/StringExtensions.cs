@@ -1,9 +1,9 @@
 ﻿using System.Net.Mail;
 using System.Text;
 
-namespace Migs.Extensions
+namespace Smart.Extensions
 {
-    public static class StringExt
+    public static class StringExtensions
     {
         /// <summary>
         /// Returns true if the given string is a Guid.

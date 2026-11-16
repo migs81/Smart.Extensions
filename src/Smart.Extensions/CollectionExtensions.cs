@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Migs.Extensions
+namespace Smart.Extensions
 {
     /// <summary>
     /// Contains extension methods for collections.
     /// </summary>
-    public static class CollectionExt
+    public static class CollectionExtensions
     {
         /// <summary>
         /// Determines whether the given collection is null or empty.

@@ -1,10 +1,10 @@
 using System.Globalization;
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests;
+namespace Smart.Extensions.UnitTests;
 
-[TestSubject(typeof(CharExt))]
-public class CharExtTests
+[TestSubject(typeof(CharExtensions))]
+public class CharExtensionsTests
 {
     [Theory]
     [InlineData('a', 'A')]

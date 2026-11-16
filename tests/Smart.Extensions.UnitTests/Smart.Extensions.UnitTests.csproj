@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Migs.Extensions\Migs.Extensions.csproj" />
+      <ProjectReference Include="..\..\src\Smart.Extensions\Smart.Extensions.csproj" />
     </ItemGroup>
 
 </Project>

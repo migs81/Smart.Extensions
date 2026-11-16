@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests;
+namespace Smart.Extensions.UnitTests;
 
-[TestSubject(typeof(CollectionExt))]
-public class CollectionExtTests
+[TestSubject(typeof(CollectionExtensions))]
+public class CollectionExtensionsTests
 {
     [Fact]
     public void IsNullOrEmpty_ValidInput_ShouldReturnFalse()
@@ -25,7 +25,7 @@ public class CollectionExtTests
         
         // assert
         Assert.True(list.IsNullOrEmpty());
-        Assert.True(CollectionExt.IsNullOrEmpty(array));
+        Assert.True(CollectionExtensions.IsNullOrEmpty(array));
     }
 
     [Fact]

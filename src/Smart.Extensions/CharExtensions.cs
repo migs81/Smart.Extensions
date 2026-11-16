@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 
-namespace Migs.Extensions
+namespace Smart.Extensions
 {
     /// <summary>
     /// Contains extension methods for characters
     /// </summary>
-    public static class CharExt
+    public static class CharExtensions
     {
         /// <summary>
         /// Converts the value of a Unicode character to its uppercase equivalent.

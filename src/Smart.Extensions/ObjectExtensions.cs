@@ -1,12 +1,12 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Migs.Extensions
+namespace Smart.Extensions
 {
     /// <summary>
     /// Contains extension methods for objects.
     /// </summary>
-    public static class ObjectExt
+    public static class ObjectExtensions
     {
         /// <summary>
         /// Gets the value or default.

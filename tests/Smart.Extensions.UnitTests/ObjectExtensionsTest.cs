@@ -1,9 +1,9 @@
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests;
+namespace Smart.Extensions.UnitTests;
 
-[TestSubject(typeof(ObjectExt))]
-public class ObjectExtTest
+[TestSubject(typeof(ObjectExtensions))]
+public class ObjectExtensionsTest
 {
     #region GetValueOrDefault
 

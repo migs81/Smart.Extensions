@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 
-namespace Migs.Extensions
+namespace Smart.Extensions
 {
     /// <summary>
     /// Contains extension methods for enums.
     /// </summary>
-    public static class EnumExt
+    public static class EnumExtensions
     {
         /// <summary>
         /// Descriptions the specified enum.

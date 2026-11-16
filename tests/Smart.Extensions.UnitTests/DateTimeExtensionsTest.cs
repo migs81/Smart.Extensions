@@ -1,9 +1,9 @@
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests;
+namespace Smart.Extensions.UnitTests;
 
-[TestSubject(typeof(DateTimeExt))]
-public class DateTimeExtTest
+[TestSubject(typeof(DateTimeExtensions))]
+public class DateTimeExtensionsTest
 {
     [Theory]
     [InlineData("31.05.2026")]

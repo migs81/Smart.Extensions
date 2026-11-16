@@ -1,9 +1,9 @@
-﻿namespace Migs.Extensions
+﻿namespace Smart.Extensions
 {
     /// <summary>
     /// Contains extension methods for DateTimes
     /// </summary>
-    public static class DateTimeExt
+    public static class DateTimeExtensions
     {
         #region Is
         

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Migs.Extensions
+namespace Smart.Extensions
 {
     internal sealed class Utf8StringWriter : StringWriter
     {

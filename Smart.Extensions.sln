@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migs.Extensions", "src\Migs.Extensions\Migs.Extensions.csproj", "{4319C20D-850B-4389-B76C-A91F78E78285}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Extensions", "src\Smart.Extensions\Smart.Extensions.csproj", "{4319C20D-850B-4389-B76C-A91F78E78285}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migs.Extensions.UnitTests", "tests\Migs.Extensions.UnitTests\Migs.Extensions.UnitTests.csproj", "{48AD7BDC-7276-4637-87CF-B52272407656}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Extensions.UnitTests", "tests\Smart.Extensions.UnitTests\Smart.Extensions.UnitTests.csproj", "{48AD7BDC-7276-4637-87CF-B52272407656}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

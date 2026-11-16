@@ -1,10 +1,10 @@
 using System.Text;
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests;
+namespace Smart.Extensions.UnitTests;
 
-[TestSubject(typeof(StringExt))]
-public class StringExtTest
+[TestSubject(typeof(StringExtensions))]
+public class StringExtensionsTest
 {
     #region IsGuid
 

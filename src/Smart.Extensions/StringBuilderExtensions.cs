@@ -1,11 +1,11 @@
 ﻿using System.Text;
 
-namespace Migs.Extensions
+namespace Smart.Extensions
 {
     /// <summary>
     /// Contains extension methods for StringBuilder.
     /// </summary>
-    public static class StringBuilderExt
+    public static class StringBuilderExtensions
     {
         /// <summary>
         /// Appends the given value if the condition is true.

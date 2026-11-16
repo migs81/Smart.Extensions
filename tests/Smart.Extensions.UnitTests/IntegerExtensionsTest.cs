@@ -1,9 +1,9 @@
 using JetBrains.Annotations;
 
-namespace Migs.Extensions.UnitTests;
+namespace Smart.Extensions.UnitTests;
 
-[TestSubject(typeof(IntegerExt))]
-public class IntegerExtTest
+[TestSubject(typeof(IntegerExtensions))]
+public class IntegerExtensionsTest
 {
     #region IsZero
 
