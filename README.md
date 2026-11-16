@@ -1,11 +1,11 @@
-# 📚 Migs.Extensions
+# 📚 Smart.Extensions
 
 A collection of useful C# extension methods.
 
 ## 📝 Description
 
 This library extends common .NET types with practical and efficient extension methods for everyday development tasks.
-It supports `.NET Standard 2.0`, `.NET 6.0`, and `.NET 8.0`.
+It supports `.NET Standard 2.0`, `.NET 8.0`, and `.NET 10.0`.
 
 ## ✨ Features
 
@@ -13,35 +13,24 @@ It supports `.NET Standard 2.0`, `.NET 6.0`, and `.NET 8.0`.
 - Reusable extension methods to reduce boilerplate code.
 - Strongly-typed helpers for improved reliability.
 - Organized and scalable structure by domain (strings, collections, dates, etc.).
-- Multi-targeted** for `.NET Standard 2.0`, `.NET 6.0`, and `.NET 8.0`.
+- Multi-targeted** for `.NET Standard 2.0`, `.NET 8.0`, and `.NET 10.0`.
 
 ## 🛠️ Prerequisites
 
-- .NET SDK (6.0 or 8.0) or a compatible IDE (Visual Studio, Rider, etc.).
+- .NET SDK (8.0 or 10.0) or a compatible IDE (Visual Studio, Rider, etc.).
 
 ## 📦 Installation
 
-1. Clone the repository:
-  ```bash
-   git clone https://github.com/migs81/Migs.Extensions.git
-  ```
-2. Navigate to the project directory:
-  ```bash
-   cd Migs.Extensions
-  ```
-3. Restore dependencies:
-  ```bash
-   dotnet restore
-  ```
-4. Build the project:
-  ```bash
-   dotnet build
-  ```
+```bash
+git clone https://github.com/migs81/Smart.Extensions.git
+cd Smart.Extensions
+dotnet build
+```
 
 ## 🚀 Usage
 
 ```csharp
-using Migs.Extensions;
+using Smart.Extensions;
 
 var text = "Hello World".ToCamelCase();
 ```
@@ -109,12 +98,12 @@ var text = "Hello World".ToCamelCase();
 ## 📂 Project Structure
 
 ```
-Migs.Extensions/
+Smart.Extensions/
 ├── src/
-│   ├── Migs.Extensions/              # Core library
+│   ├── Smart.Extensions/              # Core library
 ├── tests/                       
-│   └── Migs.Extensions.Tests         # Unit tests
-└── README.md                         # This file
+│   └── Smart.Extensions.Tests         # Unit tests
+└── README.md                          # This file
 ```
 
 ## 📄 License
