@@ -3,9 +3,7 @@
  - Add more extensions
 
 ## Extensions
- - Boolean
  - Numerics
- - Exception
  - DateOnly?
  - Enums
  - FileInfo
