@@ -46,7 +46,7 @@ public class EnumExtensionsTests
     }
     
     [Fact]
-    public void GetDescription_WhenInputIsNull_Throws()
+    public void GetDescription_WhenInputIsNull_ShouldThrow()
     {
         // arrange
         string? value = null;
@@ -59,7 +59,7 @@ public class EnumExtensionsTests
     }
     
     [Fact]
-    public void GetDescription_WhenInputIsNoEnum_Throws()
+    public void GetDescription_WhenInputIsNoEnum_ShouldThrow()
     {
         // arrange
         const string value = "";
@@ -89,7 +89,7 @@ public class EnumExtensionsTests
     }
     
     [Fact]
-    public void GetName_WhenInputIsNull_Throws()
+    public void GetName_WhenInputIsNull_ShouldThrow()
     {
         // arrange
         string? value = null;
@@ -102,7 +102,7 @@ public class EnumExtensionsTests
     }
     
     [Fact]
-    public void GetName_WhenInputIsNoEnum_Throws()
+    public void GetName_WhenInputIsNoEnum_ShouldThrow()
     {
         // arrange
         const string value = "";
