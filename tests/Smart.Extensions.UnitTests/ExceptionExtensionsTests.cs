@@ -126,7 +126,7 @@ public class ExceptionExtensionsTests
         Exception? exception = null;
         
         // act
-        var result = Record.Exception(exception!.GetBaseMessage);
+        var result = Record.Exception(exception!.GetFullMessage);
         
         // assert
         Assert.IsType<ArgumentNullException>(result);
@@ -217,7 +217,7 @@ public class ExceptionExtensionsTests
         Exception? exception = null;
         
         // act
-        var result = Record.Exception(exception!.GetMessages);
+        var result = Record.Exception(() => exception!.Contains<NullReferenceException>());
         
         // assert
         Assert.IsType<ArgumentNullException>(result);
