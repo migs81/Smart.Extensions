@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Globalization;
+using System.Net.Mail;
 using System.Text;
 
 namespace Smart.Extensions
@@ -24,10 +25,10 @@ namespace Smart.Extensions
                 _ = new MailAddress(source);
                 return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
-            }
+            }            
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace Smart.Extensions
         /// <returns>
         ///   <c>true</c> if the specified value is date; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsDate(this string value) => DateTime.TryParse(value,  out _);
+        public static bool IsDate(this string value) => DateTime.TryParse(value, out _);
 
         /// <summary>
         /// Determines whether the given string is a valid Uri.
@@ -146,7 +147,7 @@ namespace Smart.Extensions
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static bool IsUpper(this string source) => !string.IsNullOrEmpty(source) && source.ToUpper().Equals(source);
+        public static bool IsUpper(this string source) => !string.IsNullOrEmpty(source) && source.ToUpperInvariant().Equals(source);
 
         /// <summary>
         /// Indicates whether the character at the specified position is categorized as a lowercase letter.
@@ -161,7 +162,7 @@ namespace Smart.Extensions
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static bool IsLower(this string source) => !string.IsNullOrEmpty(source) && source.ToLower().Equals(source);
+        public static bool IsLower(this string source) => !string.IsNullOrEmpty(source) && source.ToLowerInvariant().Equals(source);
         
         /// <summary>
         /// Indicates whether the character at the specified position is categorized as a white space.
@@ -232,9 +233,9 @@ namespace Smart.Extensions
                 if (char.IsLetterOrDigit(c))
                 {
                     if (capitalize)
-                        array[pos] = char.ToUpper(c);
+                        array[pos] = char.ToUpperInvariant(c);
                     else
-                        array[pos] = char.ToLower(c);
+                        array[pos] = char.ToLowerInvariant(c);
 
                     capitalize = false;
                     pos++;
@@ -269,14 +270,14 @@ namespace Smart.Extensions
             foreach (var c in source)
             {
                 if (pos == 0)
-                    array[pos] = char.ToLower(c);
+                    array[pos] = char.ToLowerInvariant(c);
                 
                 if (char.IsLetterOrDigit(c))
                 {
                     if (capitalize && pos > 0)
-                        array[pos] = char.ToUpper(c);
+                        array[pos] = char.ToUpperInvariant(c);
                     else
-                        array[pos] = char.ToLower(c);
+                        array[pos] = char.ToLowerInvariant(c);
 
                     capitalize = false;
                     pos++;

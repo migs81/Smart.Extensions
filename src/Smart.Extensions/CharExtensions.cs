@@ -12,7 +12,7 @@ namespace Smart.Extensions
         /// </summary>
         /// <param name="c">The character to convert.</param>
         /// <returns>The uppercase equivalent of <paramref name="c"/>.</returns>
-        public static char ToUpper(this char c) => char.ToUpper(c);
+        public static char ToUpper(this char c) => char.ToUpperInvariant(c);
 
         /// <summary>
         /// Converts the specified character to its uppercase equivalent using the specified culture.
@@ -34,7 +34,7 @@ namespace Smart.Extensions
         /// </summary>
         /// <param name="c">The character to convert.</param>
         /// <returns>The lowercase equivalent of <paramref name="c"/>.</returns>
-        public static char ToLower(this char c) => char.ToLower(c);
+        public static char ToLower(this char c) => char.ToLowerInvariant(c);
 
         /// <summary>
         /// Converts the specified character to its lowercase equivalent using the specified culture.
