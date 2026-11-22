@@ -39,6 +39,70 @@ public static class ByteExtensions
     }
     
     /// <summary>
+    /// Computes the SHA1 hash of the specified byte array.
+    /// </summary>
+    /// <param name="value">The byte array to compute the hash for.</param>
+    /// <returns>The SHA1 hash as an uppercase hexadecimal string.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+    public static string GetSha1Hash(this byte[] value)
+    {
+        if (value is null)
+            throw new ArgumentNullException(nameof(value));
+
+        using var sha1 = SHA1.Create();
+        var bytes = sha1.ComputeHash(value);
+        return bytes.ToHexString();
+    }
+    
+    /// <summary>
+    /// Computes the SHA256 hash of the specified byte array.
+    /// </summary>
+    /// <param name="value">The byte array to compute the hash for.</param>
+    /// <returns>The SHA256 hash as an uppercase hexadecimal string.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+    public static string GetSha256Hash(this byte[] value)
+    {
+        if (value is null)
+            throw new ArgumentNullException(nameof(value));
+
+        using var sha256 = SHA256.Create();
+        var bytes = sha256.ComputeHash(value);
+        return bytes.ToHexString();
+    }
+    
+    /// <summary>
+    /// Computes the SHA384 hash of the specified byte array.
+    /// </summary>
+    /// <param name="value">The byte array to compute the hash for.</param>
+    /// <returns>The SHA384 hash as an uppercase hexadecimal string.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+    public static string GetSha384Hash(this byte[] value)
+    {
+        if (value is null)
+            throw new ArgumentNullException(nameof(value));
+
+        using var sha384 = SHA384.Create();
+        var bytes = sha384.ComputeHash(value);
+        return bytes.ToHexString();
+    }
+    
+    /// <summary>
+    /// Computes the SHA512 hash of the specified byte array.
+    /// </summary>
+    /// <param name="value">The byte array to compute the hash for.</param>
+    /// <returns>The SHA512 hash as an uppercase hexadecimal string.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+    public static string GetSha512Hash(this byte[] value)
+    {
+        if (value is null)
+            throw new ArgumentNullException(nameof(value));
+
+        using var sha512 = SHA512.Create();
+        var bytes = sha512.ComputeHash(value);
+        return bytes.ToHexString();
+    }
+    
+    /// <summary>
     /// Creates a <see cref="MemoryStream"/> from the specified byte array.
     /// </summary>
     /// <param name="bytes">The byte array to create the stream from.</param>
@@ -96,5 +160,19 @@ public static class ByteExtensions
             throw new ArgumentNullException(nameof(bytes));
         
         return Encoding.ASCII.GetString(bytes);
+    }
+
+    /// <summary>
+    /// Converts the specified byte array to a Base64-encoded string.
+    /// </summary>
+    /// <param name="bytes">The byte array to convert.</param>
+    /// <returns>The Base64-encoded string.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="bytes"/> is <see langword="null"/>.</exception>
+    public static string ToBase64String(this byte[] bytes)
+    {
+        if (bytes is null)
+            throw new ArgumentNullException(nameof(bytes));
+        
+        return Convert.ToBase64String(bytes);
     }
 }
