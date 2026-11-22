@@ -180,4 +180,35 @@ public class ByteExtensionsTests
     }
 
     #endregion
+    
+    #region ToAsciiString
+
+    [Fact]
+    public void ToAsciiString_WhenBytesAreProvided_ShouldReturnDecodedString()
+    {
+        // arrange
+        const string expected = "test";
+        var bytes = Encoding.ASCII.GetBytes(expected);
+
+        // act
+        var result = bytes.ToAsciiString();
+
+        // assert
+        Assert.Equal(expected, result);
+    }
+    
+    [Fact]
+    public void ToAsciiString_WhenBytesAreNull_ShouldThrow()
+    {
+        // arrange
+        byte[] bytes = null!;
+
+        // act
+        var result = Record.Exception(bytes.ToAsciiString);
+
+        // assert
+        Assert.IsType<ArgumentNullException>(result);
+    }
+
+    #endregion
 }
