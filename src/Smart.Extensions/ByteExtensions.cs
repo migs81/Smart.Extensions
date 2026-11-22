@@ -83,4 +83,18 @@ public static class ByteExtensions
 
         return encoding.GetString(bytes);
     }
+
+    /// <summary>
+    /// Converts the specified byte array to an ASCII-encoded string.
+    /// </summary>
+    /// <param name="bytes">The byte array to convert.</param>
+    /// <returns>The decoded ASCII string.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="bytes"/> is <see langword="null"/>.</exception>
+    public static string ToAsciiString(this byte[] bytes)
+    {
+        if (bytes is null)
+            throw new ArgumentNullException(nameof(bytes));
+        
+        return Encoding.ASCII.GetString(bytes);
+    }
 }
