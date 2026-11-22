@@ -5,7 +5,6 @@
 ## Extensions
  - Numerics
  - DateOnly?
- - Enums
  - FileInfo
  - Stream
  - Uri
